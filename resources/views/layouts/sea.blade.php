@@ -43,16 +43,12 @@
             </li>
         @else
             <li class="nav-item">
-                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                       {{ Auth::user()->username }}
-                  </a>
+                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ Auth::user()->username }}</a>
                 </li> 
                 <li class="nav-item"> 
                   <a href="{{ route('logout') }}"
                       onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();">
-                      {{ __('Logout') }}
-                    </a>
+                      document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       @csrf
                   </form>
@@ -79,8 +75,9 @@
             <div class="intro-para text-center quote">
             @guest
               <p class="small-text">Norint matyti savo statusą reikia prisijungti.</p>
+              <a href="" data-target="#login" data-toggle="modal" class="btn-tria">Prisijungti</a>
               @else
-              <p class="small-text"> Sveiki {{ Auth::user()->username }}  </p>
+              <p class="btn-triat">Sveiki, {{ Auth::user()->username }} </p>
              @endguest
             </div>
             <a href="#feature" class="mouse-hover">

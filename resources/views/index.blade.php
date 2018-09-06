@@ -37,23 +37,19 @@
            <!-- Authentication Links -->
           @guest
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                <a class="nav-link" data-target="#login" data-toggle="modal"  href="">{{ __('Login') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                <a class="nav-link" data-target="#register" data-toggle="modal"  href="">{{ __('Register') }}</a>
             </li>
         @else
         <li class="nav-item">
-                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                       {{ Auth::user()->username }}
-                  </a>
+                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ Auth::user()->username }}</a>
                 </li> 
                 <li class="nav-item"> 
                   <a href="{{ route('logout') }}"
                       onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();">
-                      {{ __('Logout') }}
-                    </a>
+                      document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       @csrf
                   </form>
@@ -64,7 +60,86 @@
     </div>
   </nav>
   <!--/ Navigation bar-->
-  <!--Modal box-->
+
+
+   <!--Modal Registration-->
+   <div class="modal fade" id="register" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+      <!-- Modal content registration-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title text-center form-title">{{ __('Register') }}</h4>
+        </div>
+        <div class="modal-body padtrbl">
+
+          <div class="login-box-body">
+            
+            <div class="form-group">
+             
+            <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                        @csrf
+
+                        <div class="form-group has-feedback">
+                           <!----- username-------------->
+                            <label for="username" class="col-md col-form-label text-md-right">{{ __('Username') }}</label>
+                            <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
+                                @if ($errors->has('username'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
+                        </div>
+
+                        <div class="form-group has-feedback">
+                           <!----- Email-------------->
+                            <label for="email" class="col-md col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                        </div>
+
+                        <div class="form-group has-feedback">
+                        <!----- password -------------->
+                            <label for="password" class="col-md col-form-label text-md-right">{{ __('Password') }}</label>
+                            <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                          </div>
+
+                        <div class="form-group has-feedback">
+                        <label for="password-confirm" class="col-md col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button type="submit" class="btn btn-green btn-block btn-flat">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!--/ Modal registration-->
+
+  <!--Modal login-->
   <div class="modal fade" id="login" role="dialog">
     <div class="modal-dialog modal-sm">
 
@@ -72,38 +147,52 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center form-title">Login</h4>
+          <h4 class="modal-title text-center form-title">{{ __('Login') }}</h4>
         </div>
         <div class="modal-body padtrbl">
 
           <div class="login-box-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            
             <div class="form-group">
-              <form name="" id="loginForm">
+              <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+              @csrf
                 <div class="form-group has-feedback">
                   <!----- username -------------->
-                  <input class="form-control" placeholder="Username" id="loginid" type="text" autocomplete="off" />
-                  <span style="display:none;font-weight:bold; position:absolute;color: red;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginid"></span>
-                  <!---Alredy exists  ! -->
-                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                </div>
-                <div class="form-group has-feedback">
-                  <!----- password -------------->
-                  <input class="form-control" placeholder="Password" id="loginpsw" type="password" autocomplete="off" />
-                  <span style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginpsw"></span>
-                  <!---Alredy exists  ! -->
-                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                  <label for="email" class="col-md col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                   <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+
+                      @if ($errors->has('email'))
+                      <span class="invalid-feedback" role="alert">
+                      <strong>{{ $errors->first('email') }}</strong>
+                      </span>
+                      @endif   
+                  </div>
+
+                    <div class="form-group has-feedback">
+                        <!----- password -------------->
+                      <label for="password" class="col-md col-form-label text-md-right">{{ __('Password') }}</label>
+
+                      
+                      <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+
+                          @if ($errors->has('password'))
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $errors->first('password') }}</strong>
+                              </span>
+                          @endif
+                    </div>
                 </div>
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="checkbox icheck">
                       <label>
-                                <input type="checkbox" id="loginrem" > Remember Me
-                              </label>
+                      <input type="checkbox" id="loginrem" > įsiminti
+                      </label>
                     </div>
                   </div>
                   <div class="col-xs-12">
-                    <button type="button" class="btn btn-green btn-block btn-flat" onclick="userlogin()">Sign In</button>
+                    <button type="submit" class="btn btn-green btn-block btn-flat" >Prisijungti</button>
                   </div>
                 </div>
               </form>
@@ -114,7 +203,7 @@
 
     </div>
   </div>
-  <!--/ Modal box-->
+  <!--/ Modal login-->
   <!--Banner-->
   <div class="banner">
     <div class="bg-color">
@@ -128,9 +217,9 @@
             <div class="intro-para text-center quote">
             @guest
               <p class="small-text">Norint matyti savo statusą reikia prisijungti.</p>
-              <a href="#" data-target="#login" data-toggle="modal" class="btn-tria">Prisijungti</a>
+              <a href="" data-target="#login" data-toggle="modal" class="btn-tria">Prisijungti</a>
               @else
-              <p class="small-text"> Sveiki {{ Auth::user()->username }}  </p>
+              <p class="small-text"> Sveiki{{ Auth::user()->username }}</p>
              @endguest
            
              
