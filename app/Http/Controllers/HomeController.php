@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+Use App\Profile;
+use Session;
+use Validator;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +28,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        
+        $loggeduser =  Auth::user()->id;
+        $userbyid = User::find($loggeduser);
+        
+        return view("home", [ "getuserbyid"=>$userbyid, "getloggeduser" => $loggeduser ] );
+       
     }
 }

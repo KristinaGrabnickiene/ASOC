@@ -9,10 +9,10 @@
   <!-- Fonts -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
   <!-- Style -->
-  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/imagehover.min.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/imagehover.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}">
   
 </head>
 
@@ -41,9 +41,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
             </li>
-        @else
+        @else 
+      
             <li class="nav-item">
-                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ Auth::user()->username }}</a>
+                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> {{ Auth::user()->username }}</a>
                 </li> 
                 <li class="nav-item"> 
                   <a href="{{ route('logout') }}"
@@ -59,45 +60,20 @@
     </div>
   </nav>
   <!--/ Navigation bar-->
-
-
-
-  <!--Banner-->
-  <div class="banner">
-    <div class="bg-color">
+  <br>
+  <br>
+  <section id="duomenys" class="section-padding">
+    <div class="container">
       <div class="container">
-        <div class="row">
-          <div class="banner-text text-center">
-            <div class="text-border">
-              <h2 class="text-dec">LAZERIŲ JACHTŲ KLASĖS ASOCIACIJA </h2>
-            </div>
+          <div class="row">
             
-            <div class="intro-para text-center quote">
-            @guest
-              <p class="small-text">Norint matyti savo statusą reikia prisijungti.</p>
-              <a href="" data-target="#login" data-toggle="modal" class="btn-tria">Prisijungti</a>
-              @else
-              <p class="btn-triat">Sveiki, {{ Auth::user()->username }} </p>
-             @endguest
-            </div>
-            <a href="#feature" class="mouse-hover">
-              
-            </a>
-          </div>
-        </div>
+            
+            @yield('content')
+        
       </div>
     </div>
   </div>
-  <!--/ Banner-->
-  <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-        <h2 class="text-center"></h2>
-        @yield('content')
-        </div>
-      </div>
-  </div>
-
+  </section>
   <!--Cta-->
   <section id="cta-2">
     <div class="container">

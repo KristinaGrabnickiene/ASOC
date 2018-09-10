@@ -9,10 +9,10 @@
   <!-- Fonts -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
   <!-- Style -->
-  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/imagehover.min.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/imagehover.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}">
   
 </head>
 
@@ -219,13 +219,12 @@
               <p class="small-text">Norint matyti savo statusą reikia prisijungti.</p>
               <a href="" data-target="#login" data-toggle="modal" class="btn-tria">Prisijungti</a>
               @else
-              <p class="small-text"> Sveiki{{ Auth::user()->username }}</p>
+              <p class="small-text"> Sveiki, {{ Auth::user()->username }}</p>
              @endguest
            
              
             </div>
-            <a href="#feature" class="mouse-hover">
-              
+            <a href="#feature" class="mouse-hover">  
             </a>
           </div>
         </div>
@@ -233,6 +232,25 @@
     </div>
   </div>
   <!--/ Banner-->
+
+   <!--duomenys-->
+   <section id="duomenys" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="header-section text-center">
+          <h2 class="white">Papildoma lentele duomenims</h2>
+        </div>
+        <div class="col-md-12 col-sm-12">
+          <div class="text-comment">
+          @yield('content')
+          
+          </div>
+        </div>
+        
+        </div>
+      </div>
+    </div>
+  </section>
   <div class="container">
       <div class="row">
         <div class="col-lg-6">
