@@ -59,6 +59,29 @@
     </div>
 </div>
 </div>  
+
+ <!--Cta-->
+ <section id="cta-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h2 class="text-center">Asociacijos nario paieška</h2>
+          <p class="cta-2-txt">Paieška vykdoma visų narių saraše</p>
+          <div class="cta-2-form text-center">
+            <form action="{{ url('/search') }}" method="post" >
+            {{ csrf_field()}}
+              <input type="text"  name="name"  placeholder="Vardas"  value="{{ old('name') }}" >
+              <input type="text"  name="surname"  placeholder="Pavarde"  value="{{ old('surname') }}" >
+              
+              <input class="btn btn-green" value="Ieškoti" type="submit">
+            </form>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </section>
+ <!--Cta-->
+
 <div class="modal fade" id="delete" role="dialog">
             <div class="modal-dialog modal-sm">
             <div class="modal-content">

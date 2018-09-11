@@ -74,24 +74,7 @@
     </div>
   </div>
   </section>
-  <!--Cta-->
-  <section id="cta-2">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h2 class="text-center">Asociacijos nario paieška</h2>
-          <p class="cta-2-txt">Paieška vykdoma aktyvių narių saraše</p>
-          <div class="cta-2-form text-center">
-            <form action="#" method="post" id="workshop-newsletter-form">
-              <input name="" placeholder="Vardas pavardė" type="email">
-              <input class="cta-2-form-submit-btn" value="Subscribe" type="submit">
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--/ Cta-->
+ 
   
  <!--Testimonial-->
  <section id="testimonial" class="section-padding">
