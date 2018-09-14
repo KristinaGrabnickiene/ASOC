@@ -20,8 +20,6 @@ config/database.php
 
 8. paleidziu migracija: php artisan migrate
 
-
-
 9. Sukuriu Car modeli: php artisan make:model Car
 
 10. app/Car.php pridedu: protected $table = "cars";
@@ -38,6 +36,10 @@ config/database.php
 
 16. Susikuriu view faila resources/views/cars.blade.php
 
-17. view faile aprasau masinu atvaidavima (pageidautina graziai)
+<!-- Middelware -->
 
-18. Sukurti repozitorija ir pasidalinti su destyoju ir draugais
+Kaip pridėti midelware:
+1. Sukuriame faila : php artisan make:middleware CheckAge
+2 sukuriame logika faile.
+3. priregistruojame : app/Http/Kernel.php
+
