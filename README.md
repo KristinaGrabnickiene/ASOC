@@ -3,6 +3,7 @@
 
 //Atidarytame folderyje paleidziu instaliuotis laravel
 3. Terminalo komanda: composer create-project --prefer-dist laravel 
+"composer install" - jei is git pasiimu.
 
 3.a Pataisau klaida : App/Provider vietoje - AppServiceProvider.php faile pridedu : public function boot(){Schema::defaultStringLength(191);}
 
