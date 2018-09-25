@@ -3,6 +3,7 @@
 
 //Atidarytame folderyje paleidziu instaliuotis laravel
 3. Terminalo komanda: composer create-project --prefer-dist laravel 
+"composer install" - jei is git pasiimu.
 
 3.a Pataisau klaida : App/Provider vietoje - AppServiceProvider.php faile pridedu : public function boot(){Schema::defaultStringLength(191);}
 
@@ -20,11 +21,9 @@ config/database.php
 
 8. paleidziu migracija: php artisan migrate
 
+9. Sukuriu Car modeli: php artisan make:model Car
 
-//kuriame modeli('prijungiame nauja duomenu lentele)
-9. Sukuriu Profile modeli: php artisan make:model Profile
-10. app/profile.php pridedu: protected $table = "profile";
-
+10. app/Car.php pridedu: protected $table = "cars";
 
 //KUriame kontroleri
 11. Sukuriu controlleri masinu: php artisan make:controller CarsController --resource
@@ -40,6 +39,11 @@ config/database.php
 
 16. Susikuriu view faila resources/views/cars.blade.php
 
-17. view faile aprasau masinu atvaidavima (pageidautina graziai)
+<!-- Middelware -->
+
+Kaip pridėti midelware:
+1. Sukuriame faila : php artisan make:middleware CheckAge
+2 sukuriame logika faile.
+3. priregistruojame : app/Http/Kernel.php
 
 18. Sukurti repozitorija ir pasidalinti su destyoju ir draugais
