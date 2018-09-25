@@ -18,12 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/search', 'HomeController@search');
+Route::get('/search', 'HomeController@search');
+Route::post('/search', 'HomeController@searchPost');
+
 
 
 //profile routai
 Route::get('/profile', 'ProfileController@index')->name('profile.index');
-Route::get('/profile/create/', 'ProfileController@create')->name('profile.create');
+Route::get('/profile/create', 'ProfileController@create')->name('profile.create');
 Route::post('/profile/store', 'ProfileController@store')->name('profile.store'); 
 Route::get("/profile/{id}/edit", "ProfileController@edit")->name('profile.edit');
 Route::post("/profile/{id}/update", "ProfileController@update")->name('profile.update');
@@ -32,6 +34,4 @@ Route::post('/profile/{id}/delete', 'ProfileController@destroy')->name('profile.
 //user routai
 Route::get('/user', 'UserController@index')->name('user.index');
 
-//papildomas routas kuria useris profili/
-Route::get('/profile/create/{id}', 'ProfileController@userCreate')->name('user.create');
-
+Route::get('/profile/{id}/documents', 'ProfileController@documents')->name('profile.documents'); 

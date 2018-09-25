@@ -7,6 +7,7 @@
     </div>
     @endif
    
+  
         
 <div class="col-md-6">
     <div class="form-group  has-feedback">
@@ -14,12 +15,13 @@
     </div>
 
     <div class="form-group has-feedback">
-        <div class="col-xs-12">
-        <a href="{{route('profile.create', Auth::user()->id )}}">  <button type="submit" class="btn btn-green btn-block btn-flat">
+       
+        <a href="{{route('profile.create')}}">  <button type="submit" class="btn btn-green btn-block btn-flat">
         Sukurti naują nario anketą</button></a>
-        </div>
+       
     </div>
 </div>
+<br>
 
 <div class="row">
     <div class="col-md-12">
@@ -47,20 +49,33 @@
                     @endif
                     
                     <td><a href="{{route('profile.edit', $value->id)}}"> <button  type="button" class="btn btn-green">Taisyti </button></a></td>
-                    <td><button type="button" class="btn btn-danger " data-toggle="modal" data-target="#delete">Ištrinti </button></td> 
-                    <td><a href=""> <button  type="button" class="btn btn-primary">Apmokėti už {{$value->name}}</button></a></td>
+                   <td> <form action="{{ route('profile.delete', $value->id) }}" class='delete-form' method="POST">
+                    {{ csrf_field() }}
+                    <button type="submit" style= "width:150px;" class="btn btn-danger"> Ištrinti </button>
+                    </form>
+                    </td>
+                    <td><a href="{{route('profile.documents', $value->id)}}"> <button  type="button" class="btn btn-primary">Tapti nariu </button></a></td>
                     </tr>
-
+             
 
                 @endforeach
             </tr>
         </table>
+        <script>
+        
+        </script>
 
     </div>
 </div>
 </div>  
+<script>
+        $('.delete-form').submit(function() {
+            
+            return confirm('Ar tikrai norite ištrinti');
+        });
+        </script>
 
- <!--Cta-->
+ <!--Paieška-->
  <section id="cta-2">
     <div class="container">
       <div class="row">
@@ -82,30 +97,5 @@
   </section>
  <!--Cta-->
 
-<div class="modal fade" id="delete" role="dialog">
-            <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="text-center form-title">Ar tikrai norite ištrinti nario anketą?</h4>
-                </div>
-                
-                <div class="modal-body">
-                    <div class = "row">
-                        <div class= "col-md-6">
-                    <button type="button" style= "width:150px;" class="btn btn-green" data-dismiss="modal">Atšaukti</button>
-                        </div>
-                        <div class= "col-md=6">
-                    <form action="{{route('profile.delete', $value->id)}}" method="POST">
-                    {{ csrf_field() }}
-                    <button type="submit" style= "width:150px;" class="btn btn-danger"> Taip </button>
-                    </form>
-                        </div>
-                    <div>
-                </div>
-            </div>
-            </div>
-        </div>
-        </div>
 
 @endsection

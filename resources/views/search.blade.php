@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-            @if ($profileResults != []  )
+            @if(!empty($profileResults))
                 <table class="table table-striped">
                     <th scope="col"> <h5>Vardas </h5></th>
                     <th scope="col"> <h5>Pavardė </h5> </th> 
@@ -32,7 +32,7 @@
                             @endforeach
                 </table>
                 @else
-                <h1> Nieko nera </h1>
+                <h1> Paieškos duomenys neįvesti </h1>
                 @endif
             </div>
         </div>
@@ -47,7 +47,13 @@
             <div class="cta-2-form text-center">
                 <form action="" method="post" >
                 {{ csrf_field()}}
+                @empty($name)
                 <input type="text"  name="name"  placeholder="Vardas" >
+
+                @else
+                <input type="text"  name="name" value="{{ $name }}"  placeholder="Vardas" >
+
+                @endempty
                 <input type="text"  name="surname" placeholder="Pavarde" >
                 
                 <input class="btn btn-green" value="Ieškoti" type="submit">

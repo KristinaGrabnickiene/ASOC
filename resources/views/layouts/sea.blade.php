@@ -13,7 +13,17 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/imagehover.min.css')}}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}">
+  <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
   
+  <script>
+        $('.delete-form').submit(function() {
+            
+            return confirm('Ar tikrai norite ištrinti');
+        });
+        </script>
 </head>
 
 <body>
@@ -26,7 +36,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="{{ url('/home') }}">
             LJKA
         </a>
       </div>
@@ -42,7 +52,18 @@
                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
             </li>
         @else 
-      
+        <li class="nav-item">
+                <a class="nav-link" href="{{ route('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('profile.index') }}">Profiliai</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('user.index') }}">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('profile.create') }}">Sukurti profilį</a>
+            </li>
             <li class="nav-item">
                   <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> {{ Auth::user()->username }}</a>
                 </li> 
@@ -74,27 +95,6 @@
     </div>
   </div>
   </section>
- 
-  
- <!--Testimonial-->
- <section id="testimonial" class="section-padding">
-    <div class="container">
-      <div class="row">
-        <div class="header-section text-center">
-          <h2 class="white">Papildoma lentele duomenims</h2>
-        </div>
-        <div class="col-md-12 col-sm-12">
-          <div class="text-comment">
-            <p class="text-par">"Cia bus tekstas"</p>
-            <p class="text-name">Cia autorius</p>
-          </div>
-        </div>
-        
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--/ Testimonial-->
 
     <!--Courses-->
   <section id="courses" class="section-padding">
@@ -110,31 +110,19 @@
       <div class="row">
         <div class="col-md-4 col-sm-6 padleft-right">
           <figure class="imghvr-fold-up">
-            <img src="img/course01.jpg" class="img-responsive">
-            <figcaption>
-              <h3>Course Name</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam atque, nostrum veniam consequatur libero fugiat, similique quis.</p>
-            </figcaption>
+            <img src="{{ asset('img/course01.jpg')}}" class="img-responsive"> 
             <a href="#"></a>
           </figure>
         </div>
         <div class="col-md-4 col-sm-6 padleft-right">
           <figure class="imghvr-fold-up">
-            <img src="img/course02.jpg" class="img-responsive">
-            <figcaption>
-              <h3>Course Name</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam atque, nostrum veniam consequatur libero fugiat, similique quis.</p>
-            </figcaption>
+            <img src="{{ asset('img/course02.jpg')}}" class="img-responsive">
             <a href="#"></a>
           </figure>
         </div>
         <div class="col-md-4 col-sm-6 padleft-right">
           <figure class="imghvr-fold-up">
-            <img src="img/course03.jpg" class="img-responsive">
-            <figcaption>
-              <h3>Course Name</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam atque, nostrum veniam consequatur libero fugiat, similique quis.</p>
-            </figcaption>
+            <img src="{{ asset('img/course03.jpg')}}" class="img-responsive">
             <a href="#"></a>
           </figure>
         </div>
@@ -156,7 +144,7 @@
           El. Paštas linas.grabnickas@sailing.lt</p>
           </div>
       
-      <!-- End newsletter-form -->
+<!-- Linkai -->
       <ul class="social-links">
         <li><a href="#link"><i class="fa fa-twitter fa-fw"></i></a></li>
         <li><a href="#link"><i class="fa fa-facebook fa-fw"></i></a></li>
@@ -166,10 +154,6 @@
       </ul>
       ©2018  All rights reserved
       <div class="credits">
-        
-
-
-     
       </div>
     </div>
   </footer>
@@ -180,7 +164,7 @@
   <script src="js/jquery.easing.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/custom.js"></script>
-  <script src="contactform/contactform.js"></script>
+
 
 </body>
 

@@ -6,15 +6,8 @@
         {{ session('status') }}
     </div>
     @endif
-@guest
-@else
- <!-- @if(Auth::user()->role == "admin") -->
- <a href=""><button  type="button" class="btn btn-dark btn-lg"> 
-                
-                 Įstoti į asociaciją mašinos įrašą </button>
-				</a> 
-<!-- @endif -->
-@endguest
+
+
 <p class="text-par"><h1> Visi užsiregistrave svetainės vartotojai: </h1></p>
            
         <div class="col-md-4">

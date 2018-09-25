@@ -6,15 +6,15 @@
         {{ session('status') }}
     </div>
     @endif
+
 @guest
 @else
- <!-- @if(Auth::user()->role == "admin") -->
- <a href=""><button  type="button" class="btn btn-dark btn-lg"> 
-                
-                 Įstoti į asociaciją mašinos įrašą </button>
-				</a> 
-<!-- @endif -->
-@endguest
+ @if(Auth::user()->role == "1")
+ <a href="{{ route('profile.create') }}"><button  type="button" class="btn btn-dark btn-lg"> 
+Pridėti profilį</button>
+</a> 
+@endif
+@endguest 
 <p class="text-par"><h1> Asosiacijos nariai </h1></p>
         <div class=row>
         <div class="col-md-6">
@@ -58,38 +58,22 @@
         <td><a href="{{route('profile.edit', $person->id)}}"> <button  type="button" class="btn btn-green">Taisyti  </button></a></td>
          
         <td>
-        <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#delete">ištrinti </button>
+        <form action="{{ route('profile.delete', $person->id) }}" class='delete-form' method="POST">
+                    {{ csrf_field() }}
+                    <button type="submit" style= "width:150px;" class="btn btn-danger"> Ištrinti </button>
+                    </form>
         </td> 
         
         @endforeach
         </table>
+
+        <script>
+        $('.delete-form').submit(function() {
+            
+            return confirm('Ar tikrai norite ištrinti');
+        });
+        </script>
               
 
-
-         <div class="modal fade" id="delete" role="dialog">
-            <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="text-center form-title">Ar tikrai norite ištrinti nario anketą?</h4>
-                </div>
-                
-                <div class="modal-body">
-                    <div class = "row">
-                        <div class= "col-md-6">
-                    <button type="button" style= "width:150px;" class="btn btn-green" data-dismiss="modal">Atšaukti</button>
-                        </div>
-                        <div class= "col-md=6">
-                    <form action="{{ route('profile.delete', $person->id) }}" method="POST">
-                    {{ csrf_field() }}
-                    <button type="submit" style= "width:150px;" class="btn btn-danger"> Taip </button>
-                    </form>
-                        </div>
-                    <div>
-                </div>
-            </div>
-            </div>
-        </div>
-        </div>
 
 @endsection

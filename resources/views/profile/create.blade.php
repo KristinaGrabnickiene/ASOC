@@ -24,6 +24,9 @@
 <form class="col-md-4" method="post" action= "{{ route('profile.store') }}">
 
         {{ csrf_field()}}
+        <div class="form-group has-feedback">
+            <input class="form-control" type="hidden" placeholder="Vardas" name="user_id"  value="{{ Auth::user()->id }}">
+        </div>
 
     <div class="form-group has-feedback">
         <div class="form-group has-feedback">

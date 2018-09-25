@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Pagination\Paginator;
+
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 use App\User;
+use App\Document;
 Use App\Profile;
 use Session;
 use Validator;
@@ -49,10 +51,12 @@ class ProfileController extends Controller
      */
     public function create()
     {
+        $user_id= Auth::user()->id;
         $profile= Profile::all();
 
        return view ("profile.create", [ 
-           "profile"=> $profile
+           "profile"=> $profile,
+           "user_id"=>$user_id
         ]);
     }
 
@@ -62,7 +66,7 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request )
     {
         $messages = [
             'surname.required' => 'Neįrašyta nario pavardė',
@@ -80,6 +84,7 @@ class ProfileController extends Controller
             'address' => 'required',
         ], $messages);
 
+
     $profile= new Profile;
 
     $profile->name = $request ->name;
@@ -87,6 +92,7 @@ class ProfileController extends Controller
     $profile->birthday = $request ->birthday;
     $profile->phone = $request ->phone;
     $profile->address = $request ->address;
+    $profile->user_id =  $request ->user_id;
     $profile->expirationDate = '1770-07-07';
     
     $profile->save();
@@ -176,40 +182,23 @@ class ProfileController extends Controller
         return redirect()->back();
     }
 
-    public function userCreate($id)
+    public function documents($id)
     {
+        $profile= Profile::find($id);
        
-        $userbyid = User::find($id);
+        $dateOfBirth = $profile->birthday;
+        $now= new Carbon();
+        $years = Carbon::parse($dateOfBirth)->age;
+        $documents = Document::all();
 
-        $messages = [
-            'surname.required' => 'Neįrašyta nario pavardė',
-            'name.required' => 'Neįrašytas nario vardas',
-            'phone.required' => 'Telefonas turi būti įvestas',
-            'birthday.required' => 'Gimtadienis turi būti įvestas',
-            'address.required' => 'Adresas turi būti įvestas'
-        ];
-    // Patikriname uzklausos duomenis
-    $validatedProfile = $request->validate([
-            'name' => 'required',
-            'surname' => 'required',
-            'birthday' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-        ], $messages);
-
-    $profile= new Profile;
-
-    $profile->name = $request ->name;
-    $profile->surname = $request ->surname;
-    $profile->birthday = $request ->birthday;
-    $profile->phone = $request ->phone;
-    $profile->user_id = $userbyid;
-    $profile->address = $request ->address;
-    $profile->expirationDate = '1770-07-07';
-    
-    $profile->save();
-
-    Session::flash( 'status', 'Anketa sėkmingai užpildyta' );
-    return redirect()->back();
+       return view ("profile.documents", [ 
+           "profile"=> $profile,
+           "years"=>$years,
+           "now"=>$now,
+           "documents" => $documents
+        ]);
     }
+
+    
+    
 }

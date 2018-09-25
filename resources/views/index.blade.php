@@ -14,6 +14,12 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('css/imagehover.min.css')}}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}">
   
+  <script>
+        $('.delete-form').submit(function() {
+            
+            return confirm('Ar tikrai norite ištrinti');
+        });
+        </script>
 </head>
 
 <body>
@@ -233,63 +239,59 @@
   </div>
   <!--/ Banner-->
 
-   <!--duomenys-->
-   <section id="duomenys" class="section-padding">
-    <div class="container">
-      <div class="row">
-        <div class="header-section text-center">
-          <h2 class="white">Papildoma lentele duomenims</h2>
-        </div>
-        <div class="col-md-12 col-sm-12">
-          <div class="text-comment">
-          @yield('content')
-          
-          </div>
-        </div>
-        
-        </div>
-      </div>
-    </div>
-  </section>
-  <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-        <h2 class="text-center"></h2>
-        @yield('content')
-        </div>
-      </div>
-  </div>
-
-  <!--paieška-->
-  <section id="cta-2">
+ <!--Paieška-->
+ <section id="cta-2">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <h2 class="text-center">Asociacijos nario paieška</h2>
-          <p class="cta-2-txt">Paieška vykdoma aktyvių narių saraše</p>
+          <p class="cta-2-txt">Paieška vykdoma visų narių saraše</p>
           <div class="cta-2-form text-center">
-            <form action="#" method="post" id="workshop-newsletter-form">
-              <input name="" placeholder="Vardas pavardė" type="email">
-              <input class="cta-2-form-submit-btn" value="Subscribe" type="submit">
+            <form action="{{ url('/search') }}" method="post" >
+            {{ csrf_field()}}
+              <input type="text"  name="name"  placeholder="Vardas"  value="{{ old('name') }}" >
+              <input type="text"  name="surname"  placeholder="Pavarde"  value="{{ old('surname') }}" >
+              
+              <input class="btn btn-green" value="Ieškoti" type="submit">
             </form>
           </div>
         </div>
-      </div>
+      </div>  
     </div>
   </section>
-  <!--/ paieška-->
+ <!--Paieška-->
   
-  <!--duomenys-->
-  <section id="testimonial" class="section-padding">
+
+ <!--duomenys-->
+ <section id="testimonial" class="section-padding">
     <div class="container">
       <div class="row">
         <div class="header-section text-center">
-          <h2 class="white">Papildoma lentele duomenims</h2>
+          <h2 class="white">Stojimo į „Lazerių jachtų klasės asociaciją“ tvarka </h2>
         </div>
         <div class="col-md-12 col-sm-12">
           <div class="text-comment">
-            <p class="text-par">"Cia bus tekstas"</p>
-            <p class="text-name">Cia autorius</p>
+            <p class="text-par">
+
+Stojantys į <strong> „Lazerių jachtų klasės asociaciją“</strong> ir <strong>„Lietuvos buriuotojų sąjungą“</strong>, turi užpildyti šias 2 formas:
+<br>
+<br>
+1. Prašymas priimti į Lazerių jachtų klasės asociaciją ir Lietuvos buriuotojų sąjungą. <br>
+2. Balso teisės perleidimas Lazerių jachtų klasės asociacijos atstovui LBS reikaluose. <br>
+3. Apmokėti nario mokestį.
+<br>
+<br>
+Stojantys tik į<strong> „Lazerių jachtų klasės asociaciją“</strong> turi užpildyti šią formą: 
+<br>
+<br>
+1. Prašymas priimti į Lazerių jachtų klasės asociaciją.<br>
+2. Apmokėti nario mokestį.
+<br>
+
+Formą atsiųsti el. paštu linas.grabnickas@sailing.lt . 
+Originalą perduoti Adomui Janulioniui arba Linui Grabnickui prie galimybės, arba išsiųsti laišku į LJKA būstinę. 
+</p>
+           
           </div>
         </div>
         
@@ -297,7 +299,6 @@
       </div>
     </div>
   </section>
-  <!--/ duomenys-->
 
     <!--galerija-->
   <section id="courses" class="section-padding">

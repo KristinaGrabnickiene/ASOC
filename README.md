@@ -21,14 +21,16 @@ config/database.php
 8. paleidziu migracija: php artisan migrate
 
 
+//kuriame modeli('prijungiame nauja duomenu lentele)
+9. Sukuriu Profile modeli: php artisan make:model Profile
+10. app/profile.php pridedu: protected $table = "profile";
 
-9. Sukuriu Car modeli: php artisan make:model Car
 
-10. app/Car.php pridedu: protected $table = "cars";
-
+//KUriame kontroleri
 11. Sukuriu controlleri masinu: php artisan make:controller CarsController --resource
 
 12. Sukuriu route'a routes/web.php faile.
+
 
 13. Aprasau masinu atvaizdavimo funkcija controlleryje (pvz: index)
 
