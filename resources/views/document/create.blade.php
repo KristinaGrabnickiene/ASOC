@@ -1,0 +1,86 @@
+@extends('layouts.sea')
+
+@section('content')
+@if (session('status'))
+    <div class="alert alert-success" role="alert">
+        {{ session('status') }}
+    </div>
+    @endif
+
+{{-- Klaidu isvedimas pagal laravelio validatoriu--}}
+       @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+<p class='modal-title text-center form-title'><h1> Naujas dokumento šablonas </h1></p>
+
+
+<form class="col-md-8" method="post" action= "{{ route('document.store') }}">
+
+        {{ csrf_field()}}
+       
+
+    <div class="form-group has-feedback">
+        <div class="form-group has-feedback">
+            <label  class="col-md col-form-label text-md-right"> Pavadinimas  </label>
+            <input class="form-control" type="text"  name="name"  value="{{ old('name') }}">
+        </div>
+        <div class="form-group has-feedback">
+            <label class="col-md col-form-label text-md-right"> Tinkamas amžius nuo:  </label> 
+            <input class="form-control"  type="number"  name="age_from" value="{{ old('age_from') }}">   
+        </div>
+        <div class="form-group has-feedback">
+            <label  class="col-md col-form-label text-md-right">Tinkamas amžius iki:  </label> 
+            <input class="form-control"  type="number"  name="age_till" value="{{ old('age_till') }}">   
+        </div>
+        
+        <div class="form-group has-feedback">
+            <label  class="col-md col-form-label text-md-right">data1:  </label> 
+            <input class="form-control"  type="text"  name="create_date" value="{{ old('create_date') }}">   
+        </div> 
+        <div class="form-group has-feedback">
+            <label  class="col-md col-form-label text-md-right">data2:  </label> 
+            <input class="form-control"  type="text"  name="valid_till" value="{{ old('valid_till') }}">   
+        </div>
+
+        
+
+        <div class="form-group  has-feedback">
+                <label  class="col-md col-form-label  text-uppercase text-md-center"> Organizacija </label>  
+                    <select class="form-control"  name="organisation_id">
+                        
+                        @foreach($organisations as $organisation)
+                            <option value="{{ $organisation->id }}">{{ $organisation->name }}</option>
+                        @endforeach
+                    </select>
+            </div>
+
+        <div class="form-group has-feedback">
+            <label class="col-md col-form-label text-md-right">Mokestis (nebūtinas) </label> 
+            <input class="form-control"  type="number"  name="price" value="{{ old('price') }}">   
+        </div>
+
+        <div class="form-group has-feedback">
+            <label  class="col-md col-form-label text-md-right"> Dokumento tekstas:  </label> 
+            <textarea rows="8" cols="100"  type="text"  name="text" > {{ old('text') }} </textarea>  
+        </div>
+        
+    </div>  
+        <div class="form-group has-feedback">
+            <div class="col-xs-12">
+                <button type="submit" class="btn btn-green btn-block btn-flat">
+                    Išsaugoti
+                </button>
+            </div>
+        </div>
+
+</form>
+
+
+@endsection

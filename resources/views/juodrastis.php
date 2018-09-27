@@ -77,3 +77,10 @@
       </div>
     </div>
   </section>
+
+
+@if (( $document->create_date <= $now ) &&  ( $document->valid_till  > $now ) &&  ($document->age_from <= $years) && ($document->age_till > $years) ) 
+
+<p> Jam {{$years}} , mokėti {{ $document-> price}} $, nes {{ $document-> name }} ir {{ $document-> id}} 
+@else 
+@endif

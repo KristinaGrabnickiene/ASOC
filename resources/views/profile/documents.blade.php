@@ -17,16 +17,15 @@
     <div class="form-group has-feedback">
     
 
-        <h1>{{$profile->name}} yra  {{$years}}  </h1> 
-        <h5> Dabar: {{$now}} </h5>
-       
+        <h1>Jums yra  {{$years}}  metų </h1> 
+      
+       <p>Todėl reikia užpildyti šiuos dokumentus: </p>
+
             @foreach($documents as $document)
 
-            @if (( $document->create_date <= $now ) &&  ( $document->valid_till  > $now ) &&  ($document->age_from <= $years) && ($document->age_till > $years) ) 
+           <a a href="{{route('document.show', $document->id) }}" > {{$document->name}} </a> <br> 
 
-                 <p> Jam {{$years}} , mokėti {{ $document-> price}} $, nes {{ $document-> name }} ir {{ $document-> id}} 
-            @else 
-            @endif
+
 
         @endforeach
     </div>

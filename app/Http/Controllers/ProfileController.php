@@ -184,13 +184,29 @@ class ProfileController extends Controller
 
     public function documents($id)
     {
+        //randame tinkama profile su jo duomenimis: pvz. gimimo data;
         $profile= Profile::find($id);
-       
+        $now= new Carbon(); //dabartines datos laikas
         $dateOfBirth = $profile->birthday;
-        $now= new Carbon();
-        $years = Carbon::parse($dateOfBirth)->age;
-        $documents = Document::all();
+        $years = Carbon::parse($dateOfBirth)->age; // kiek jam metu
 
+        //tikriname ar tai shablonas ar ne
+        $documentsNULL = Document::whereNull('accept')->get();
+
+        //pradedame filtravima:
+        //$documents =  Document::where('create_date', '<=', $now)->where('valid_till', '>' , $now)->get();
+        
+
+        $documents =  Document::where([
+            ['create_date', '<=', $now],
+            ['valid_till', '>' , $now],
+            ['age_from', '<=', $years],
+            ['age_till', '>' , $years],
+             ])->whereNull('accept')
+             ->get();
+             
+        
+        
        return view ("profile.documents", [ 
            "profile"=> $profile,
            "years"=>$years,

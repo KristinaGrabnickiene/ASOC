@@ -62,6 +62,9 @@
                 <a class="nav-link" href="{{ route('user.index') }}">Users</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('document.index') }}">Dokumentų šablonai</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('profile.create') }}">Sukurti profilį</a>
             </li>
             <li class="nav-item">
