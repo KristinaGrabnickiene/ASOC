@@ -72,7 +72,7 @@ class DocumentsController extends Controller
             'age_till' => 'required',
             'create_date' => 'required',
             'valid_till' => 'required',
-            'organisation_id' => 'required',
+            'org_id' => 'required',
           
                         
         ], $messages);
@@ -85,7 +85,7 @@ class DocumentsController extends Controller
         $document->age_till = $request ->age_till;
         $document->create_date = $request->create_date;
         $document->valid_till =  $request->valid_till;
-        $document->organisation_id = $request ->organisation_id;
+        $document->org_id = $request ->organisation_id;
         $document->price =  $request ->price;
         
         $document->save();
@@ -156,7 +156,7 @@ class DocumentsController extends Controller
             'age_till' => 'required',
             'create_date' => 'required',
             'valid_till' => 'required',
-            'organisation_id' => 'required',
+            'org_id' => 'required',
           
                         
         ], $messages);
@@ -169,7 +169,7 @@ class DocumentsController extends Controller
         $document->age_till = $request ->age_till;
         $document->create_date = $request->create_date;
         $document->valid_till =  $request->valid_till;
-        $document->organisation_id = $request ->organisation_id;
+        $document->org_id = $request ->organisation_id;
         $document->price =  $request ->price;
         
         $document->save();
@@ -207,7 +207,7 @@ class DocumentsController extends Controller
         $newDocument->age_till = $document ->age_till;
         $newDocument->create_date = $document->create_date;
         $newDocument->valid_till =  $document->valid_till;
-        $newDocument->organisation_id = $document ->organisation_id;
+        $newDocument->org_id = $document ->org_id;
         $newDocument->price =  $document->price;
         $newDocument->profile_id =  $profile->id;
         $newDocument->accept = $document ->id;

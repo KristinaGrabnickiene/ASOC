@@ -202,7 +202,6 @@ class ProfileController extends Controller
             ['valid_till', '>' , $now],
             ['age_from', '<=', $years],
             ['age_till', '>' , $years],
-            ['profile_id', '!==' , $profile->id],
              ])->whereNull('accept') 
              ->get();
              

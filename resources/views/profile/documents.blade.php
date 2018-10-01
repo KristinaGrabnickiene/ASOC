@@ -23,10 +23,13 @@
 
         <table>
             <tr>
+           
                 @foreach($documents as $document)
-<td> {{$document->id}}  </td>
+               
+                <td> Nr. {{$document->id}}  </td>
                 <td> <a href="{{route('document.show', ['document' => $document->id, 'profile' => $profile->id] ) }}" > {{$document->name}} </a></td>
             </tr>
+       
         @endforeach
 
         </table> 
@@ -38,7 +41,7 @@
     
         <p> @foreach($singed as $sing) 
         @if ($sing->profile_id == $profile->id ) 
-        <h5>{{$sing->name}} Pasirašytas  </h5> </p> <p>Sumokėti {{$sing->price}} </P>
+        <h5>Nr.{{$sing->accept}}   {{$sing->name}} Pasirašytas  </h5> </p> <p>Sumokėti {{$sing->price}} </P>
         @endif
         @endforeach 
         
