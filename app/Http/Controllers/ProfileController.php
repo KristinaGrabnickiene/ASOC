@@ -202,16 +202,18 @@ class ProfileController extends Controller
             ['valid_till', '>' , $now],
             ['age_from', '<=', $years],
             ['age_till', '>' , $years],
-             ])->whereNull('accept')
+            ['profile_id', '!==' , $profile->id],
+             ])->whereNull('accept') 
              ->get();
              
-        
+        $singed = Document::all();
         
        return view ("profile.documents", [ 
            "profile"=> $profile,
            "years"=>$years,
            "now"=>$now,
-           "documents" => $documents
+           "documents" => $documents,
+           "singed"=>$singed
         ]);
     }
 

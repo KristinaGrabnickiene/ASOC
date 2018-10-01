@@ -38,9 +38,12 @@ Route::get('/profile/{id}/documents', 'ProfileController@documents')->name('prof
 
 //profile routai
 Route::get('/document', 'DocumentsController@index')->name('document.index');
-Route::get('/document/{id}/show', 'DocumentsController@show')->name('document.show');
+Route::get('/document/{document}/{profile}/show', 'DocumentsController@show')->name('document.show');
 Route::get('/document/create', 'DocumentsController@create')->name('document.create');
 Route::post('/document/store', 'DocumentsController@store')->name('document.store'); 
 Route::get("/document/{id}/edit", "DocumentsController@edit")->name('document.edit');
 Route::post("/document/{id}/update", "DocumentsController@update")->name('document.update');
 Route::post('/document/{id}/delete', 'DocumentsController@destroy')->name('document.delete');
+
+
+Route::post('/document/{document}/{profile}/{accept}/updateAccept', 'DocumentsController@accept')->name('document.accept');

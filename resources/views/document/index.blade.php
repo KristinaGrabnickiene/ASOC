@@ -24,7 +24,9 @@ Sukurti naują dokumento šabloną</button>
         <th > <h3> Pavadinimas </h3></th>
         <th > <h3>Tekstas </h3> </th> 
         <th>Amžius </th>
-        <th>Mokestis</th>      
+        <th>Mokestis</th> 
+        <th></th>
+        <th></th>     
 
 <!-- Einame per visą duomenų bazę -->
         @foreach($documents as $document)

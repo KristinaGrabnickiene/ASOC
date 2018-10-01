@@ -21,13 +21,27 @@
       
        <p>Todėl reikia užpildyti šiuos dokumentus: </p>
 
-            @foreach($documents as $document)
-
-           <a a href="{{route('document.show', $document->id) }}" > {{$document->name}} </a> <br> 
-
-
-
+        <table>
+            <tr>
+                @foreach($documents as $document)
+<td> {{$document->id}}  </td>
+                <td> <a href="{{route('document.show', ['document' => $document->id, 'profile' => $profile->id] ) }}" > {{$document->name}} </a></td>
+            </tr>
         @endforeach
+
+        </table> 
+
+    </div>
+    <div class="form-group has-feedback"> 
+        
+        <h5>Pasirašyti dokumantai: </h5>
+    
+        <p> @foreach($singed as $sing) 
+        @if ($sing->profile_id == $profile->id ) 
+        <h5>{{$sing->name}} Pasirašytas  </h5> </p> <p>Sumokėti {{$sing->price}} </P>
+        @endif
+        @endforeach 
+        
     </div>
 </div>
 <br>

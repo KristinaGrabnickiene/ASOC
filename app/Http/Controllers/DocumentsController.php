@@ -100,14 +100,15 @@ class DocumentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($document, $profile)
     {
         
-         $documents= Document::find($id);
-        
-        return view ("document.show", [ 
+        $document= Document::find($document);
+        $profile=Profile::find($profile);
 
-            "documents" => $documents
+        return view ("document.show", [ 
+            "profile"=>$profile,
+            "document" => $document
          ]);
     }
 
@@ -192,5 +193,32 @@ class DocumentsController extends Controller
 		Session::flash( 'status', 'Dokumento šablonas sėkmingai ištrintas ' );
         return redirect()->back();
 
+    }
+    public function accept($document, $profile, $accept)
+    {
+        
+        $document= Document::find($document);
+        $profile=Profile::find($profile);
+
+        $newDocument= new Document;
+        $newDocument->name = $document ->name;
+        $newDocument->text = $document ->text;
+        $newDocument->age_from = $document ->age_from;
+        $newDocument->age_till = $document ->age_till;
+        $newDocument->create_date = $document->create_date;
+        $newDocument->valid_till =  $document->valid_till;
+        $newDocument->organisation_id = $document ->organisation_id;
+        $newDocument->price =  $document->price;
+        $newDocument->profile_id =  $profile->id;
+        $newDocument->accept = $document ->id;
+        
+
+        $newDocument->save();
+
+
+        return redirect()->route ("profile.documents", [ 
+            "profile"=>$profile,
+            "document" => $document
+         ]);
     }
 }

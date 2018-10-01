@@ -23,38 +23,37 @@
 
 <form class="col-md-4" method="post" action= "{{route( 'document.update', $document->id )}}">
         <input type="hidden" name ="profileId" 
-        value="{{ ($document) ? $document["id"]: '' }}">
+        value="{{ ($document) ? $document['id']: '' }}">
         {{ csrf_field()}}
 
-        {{ csrf_field()}}
        
 
     <div class="form-group has-feedback">
         <div class="form-group has-feedback">
             <label  class="col-md col-form-label text-md-right"> Pavadinimas  </label>
             <input class="form-control" type="text"  name="name"  
-            value="{{ ($document) ? $document["name"]: '' }}">
+            value="{{ ($document) ? $document['name']: '' }}">
         </div>
         <div class="form-group has-feedback">
             <label class="col-md col-form-label text-md-right"> Tinkamas amžius nuo:  </label> 
             <input class="form-control"  type="number"  name="age_from" 
-            value="{{ ($document) ? $document["age_from"]: '' }}">   
+            value="{{ ($document) ? $document['age_from']: '' }}">   
         </div>
         <div class="form-group has-feedback">
             <label  class="col-md col-form-label text-md-right">Tinkamas amžius iki:  </label> 
             <input class="form-control"  type="number"  name="age_till" 
-            value="{{ ($document) ? $document["age_till"]: '' }}">   
+            value="{{ ($document) ? $document['age_till']: '' }}">   
         </div>
         
         <div class="form-group has-feedback">
             <label  class="col-md col-form-label text-md-right">Dokumento įsigaliojimo data:  </label> 
             <input class="form-control"  type="text"  name="create_date" 
-            value="{{ ($document) ? $document["create_date"]: '' }}">   
+            value="{{ ($document) ? $document['create_date']: '' }}">   
         </div> 
         <div class="form-group has-feedback">
             <label  class="col-md col-form-label text-md-right">Dokumento pabaiga:  </label> 
             <input class="form-control"  type="text"  name="valid_till" 
-            value="{{ ($document) ? $document["valid_till"]: '' }}">   
+            value="{{ ($document) ? $document['valid_till']: '' }}">   
         </div>     
 
         <div class="form-group  has-feedback">
@@ -62,7 +61,7 @@
                     <select class="form-control"  name="organisation_id">
                         
                         @foreach($organisations as $organisation)
-                            <option value="{{ ($document) ? $document["organisation_id"]: '' }}">{{ $organisation->name }}</option>
+                            <option value="{{ ($document) ? $document['organisation_id']: '' }}">{{ $organisation->name }}</option>
                         @endforeach
                     </select>
             </div>
@@ -70,7 +69,7 @@
         <div class="form-group has-feedback">
             <label class="col-md col-form-label text-md-right">Mokestis (nebūtinas) </label> 
             <input class="form-control"  type="number"  name="price" 
-            value="{{ ($document) ? $document["price"]: '' }}">   
+            value="{{ ($document) ? $document['price']: '' }}">   
         </div>
 
         <div class="form-group has-feedback">
