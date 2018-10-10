@@ -18,7 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/search', 'HomeController@search');
 Route::post('/search', 'HomeController@searchPost');
 
 
@@ -45,5 +44,5 @@ Route::get("/document/{id}/edit", "DocumentsController@edit")->name('document.ed
 Route::post("/document/{id}/update", "DocumentsController@update")->name('document.update');
 Route::post('/document/{id}/delete', 'DocumentsController@destroy')->name('document.delete');
 
-
+//dokumento pasirašymas
 Route::post('/document/{document}/{profile}/{accept}/updateAccept', 'DocumentsController@accept')->name('document.accept');

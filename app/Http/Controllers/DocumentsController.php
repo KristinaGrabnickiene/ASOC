@@ -8,6 +8,7 @@ use App\User;
 use App\Document;
 use App\Organisation;
 Use App\Profile;
+Use App\ProfileDocument;
 use Session;
 use Validator;
 use Auth;
@@ -102,13 +103,18 @@ class DocumentsController extends Controller
      */
     public function show($document, $profile)
     {
-        
+        if(ProfileDocument::where([['profile_id',$profile],['document_id',$document]])->doesntExist())
+            {
         $document= Document::find($document);
         $profile=Profile::find($profile);
-
+        $result = 1;
+            } else{
+                $result = 0;
+            }
         return view ("document.show", [ 
             "profile"=>$profile,
-            "document" => $document
+            "document" => $document,
+            "result"=> $result,
          ]);
     }
 
@@ -197,28 +203,19 @@ class DocumentsController extends Controller
     public function accept($document, $profile, $accept)
     {
         
-        $document= Document::find($document);
-        $profile=Profile::find($profile);
+        $profiledocument= new ProfileDocument;
+        $profiledocument->profile_id = $profile;
+        $profiledocument->document_id = $document;
+        $profiledocument->paid = 0;
+        $profiledocument->save();
+            
+           
 
-        $newDocument= new Document;
-        $newDocument->name = $document ->name;
-        $newDocument->text = $document ->text;
-        $newDocument->age_from = $document ->age_from;
-        $newDocument->age_till = $document ->age_till;
-        $newDocument->create_date = $document->create_date;
-        $newDocument->valid_till =  $document->valid_till;
-        $newDocument->org_id = $document ->org_id;
-        $newDocument->price =  $document->price;
-        $newDocument->profile_id =  $profile->id;
-        $newDocument->accept = $document ->id;
-        
-
-        $newDocument->save();
-
-
-        return redirect()->route ("profile.documents", [ 
+        Session::flash( 'status', 'Dokumentas išsaugoti  ' );
+        return redirect()->route("profile.documents", [ 
             "profile"=>$profile,
-            "document" => $document
+            "document" => $document,
+            "profiledocument" =>$profiledocument,
          ]);
-    }
-}
+
+}}

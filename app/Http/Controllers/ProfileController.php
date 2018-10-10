@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 use App\Document;
+use App\ProfileDocument;
 Use App\Profile;
 use Session;
 use Validator;
@@ -163,7 +164,7 @@ class ProfileController extends Controller
     $profile->save();
 
     Session::flash( 'status', 'Anketa sėkmingai atnaujinta' );
-    return redirect()->back();
+    return redirect()->route("home");
     }
 
     /**
@@ -184,6 +185,7 @@ class ProfileController extends Controller
 
     public function documents($id)
     {
+        
         //randame tinkama profile su jo duomenimis: pvz. gimimo data;
         $profile= Profile::find($id);
         $now= new Carbon(); //dabartines datos laikas
@@ -193,26 +195,25 @@ class ProfileController extends Controller
         //tikriname ar tai shablonas ar ne
         $documentsNULL = Document::whereNull('accept')->get();
 
-        //pradedame filtravima:
-        //$documents =  Document::where('create_date', '<=', $now)->where('valid_till', '>' , $now)->get();
+            $documents =  Document:: where([
+                ['create_date', '<=', $now],
+                ['valid_till', '>' , $now],
+                ['age_from', '<=', $years],
+                ['age_till', '>' , $years],])->
+            whereNull('accept') ->get();
         
-
-        $documents =  Document::where([
-            ['create_date', '<=', $now],
-            ['valid_till', '>' , $now],
-            ['age_from', '<=', $years],
-            ['age_till', '>' , $years],
-             ])->whereNull('accept') 
-             ->get();
-             
-        $singed = Document::all();
+            $profileDocument = ProfileDocument::where([
+                ['profile_id', $profile->id],])->
+                get();
+           
+       
         
-       return view ("profile.documents", [ 
+            return view ("profile.documents", [ 
            "profile"=> $profile,
            "years"=>$years,
            "now"=>$now,
            "documents" => $documents,
-           "singed"=>$singed
+           "profileDocument"=>$profileDocument
         ]);
     }
 

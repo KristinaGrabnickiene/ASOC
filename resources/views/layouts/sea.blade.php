@@ -18,12 +18,20 @@
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
   
-  <script>
-        $('.delete-form').submit(function() {
-            
-            return confirm('Ar tikrai norite ištrinti');
-        });
-        </script>
+<script>
+  //Function delete submit
+    $('.delete-form').submit(function() {
+        
+        return confirm('Ar tikrai norite ištrinti');
+    });
+
+       
+    // fuction "Go back" on all pages
+    function goBack() {
+    window.history.back();
+      };
+      
+</script>
 </head>
 
 <body>
@@ -52,10 +60,12 @@
                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
             </li>
         @else 
+        
         <li class="nav-item">
                 <a class="nav-link" href="{{ route('home') }}">Home</a>
             </li>
             <li class="nav-item">
+            @if(Auth::user()->role == "1")
                 <a class="nav-link" href="{{ route('profile.index') }}">Profiliai</a>
             </li>
             <li class="nav-item">
@@ -67,6 +77,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('profile.create') }}">Sukurti profilį</a>
             </li>
+            @endif
             <li class="nav-item">
                   <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> {{ Auth::user()->username }}</a>
                 </li> 
@@ -99,40 +110,7 @@
   </div>
   </section>
 
-    <!--Courses-->
-  <section id="courses" class="section-padding">
-    <div class="container">
-      <div class="row">
-        <div class="header-section text-center">
-          <h2>Galerija</h2>
-           <hr class="bottom-line">
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 col-sm-6 padleft-right">
-          <figure class="imghvr-fold-up">
-            <img src="{{ asset('img/course01.jpg')}}" class="img-responsive"> 
-            <a href="#"></a>
-          </figure>
-        </div>
-        <div class="col-md-4 col-sm-6 padleft-right">
-          <figure class="imghvr-fold-up">
-            <img src="{{ asset('img/course02.jpg')}}" class="img-responsive">
-            <a href="#"></a>
-          </figure>
-        </div>
-        <div class="col-md-4 col-sm-6 padleft-right">
-          <figure class="imghvr-fold-up">
-            <img src="{{ asset('img/course03.jpg')}}" class="img-responsive">
-            <a href="#"></a>
-          </figure>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--/ Courses-->
+
  
 
   <!--Footer-->

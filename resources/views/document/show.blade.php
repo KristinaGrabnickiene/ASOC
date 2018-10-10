@@ -6,7 +6,7 @@
         {{ session('status') }}
     </div>
     @endif
-    
+@if($result == 1)
 
 
                 <h1>{{$document->name}}</h1>
@@ -17,6 +17,7 @@
 
                  
                 <!-- Default unchecked -->
+             
  <form class="was-validated" method="post" action= "{{route( 'document.accept', ['document' => $document->id, 'profile' => $profile->id, 'accept'=> 1])}}" >
  <input type="hidden" name ="documentID" 
         value="{{ ($document) ? $document['id']: '' }}">
@@ -28,8 +29,10 @@
 <br>
     <input type="checkbox" class="custom-control-input" id="accept" required>
     <label class="custom-control-label"><h1>Sutinku</h1></label>
+   
     
 
+    
     <div class="form-group has-feedback">
             <div class="col-xs-4">
                 <button type="submit" class="btn btn-green btn-block btn-flat">
@@ -38,7 +41,13 @@
             </div>
         </div>
   </div>
-               
+@else
+                <h3> Toks dokumentas jau pasirašytas </h3>
+                <br>
+                <br>
+                <button  type="button" class="btn btn-green" onclick="goBack()">Grįžti atgal</button>
+@endif
+      
                    
 @endsection 
             

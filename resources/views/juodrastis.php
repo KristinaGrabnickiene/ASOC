@@ -84,3 +84,5 @@
 <p> Jam {{$years}} , mokėti {{ $document-> price}} $, nes {{ $document-> name }} ir {{ $document-> id}} 
 @else 
 @endif
+
+Route::get('/search', 'HomeController@search');
